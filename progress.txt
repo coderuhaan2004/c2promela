@@ -1,0 +1,6 @@
+=====================DONE========================================
+1. Database created & created retrieval process.
+
+====================TO-DO========================================
+1. Give good prompt to LLM to generate appropriate queries.
+2. Give prompt of constructs and previous generated answer to LLM to generate promela code.
