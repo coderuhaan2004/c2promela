@@ -28,5 +28,25 @@
         "name": "#define",
         "example": "\"\n    #define true    1         // Define true as constant 1\n    #define false   0         // Define false as constant 0\n    #define Aturn   false     // Define Aturn as false\n    #define Bturn   true      // Define Bturn as true\n    ",
         "scenario": "Used to define constant values or symbolic names in Promela specifications, similar to C-style macros."
+    },
+    "Typedef Declaration": {
+        "name": "typedef construct",
+        "example": "\n    typedef Node {\n        int value;\n        int next;\n    }\n\n    Node node_mem[2];\n    int head = 0;\n\n    init {\n        atomic {\n            node_mem[0].value = 10;\n            node_mem[0].next = 1;\n            node_mem[1].value = 20;\n        }\n    }",
+        "scenario": "Used to define custom data structures similar to structs in C, allowing the grouping of related variables under one type."
+    },
+    "Inline Definition": {
+        "name": "inline construct",
+        "example": "\n    inline square(x) {\n        x = x * x;\n    }\n\n    init {\n        int num = 5;\n        square(num);\n        printf(\"Square: %d\\n\", num);\n    }",
+        "scenario": "Used to define reusable code blocks, similar to macros in C, helping to reduce repetition and improve code clarity."
+    },
+    "Repetition and Nondeterministic Choice": {
+        "name": "do...od construct",
+        "example": "\n    byte x;\n\n    proctype randomChoice() {\n        do\n        :: x = 1; printf(\"Randomly chose: %d\\n\", x);\n        :: x = 2; printf(\"Randomly chose: %d\\n\", x);\n        :: x = 3; printf(\"Randomly chose: %d\\n\", x);\n        :: break;\n        od;\n    }\n\n    init {\n        run randomChoice();\n    }",
+        "scenario": "Used to model repetition and nondeterministic choices among multiple guarded commands, continuing until a break is encountered or no guard is executable."
+    },
+    "Loops with Conditionals": {
+        "name": "do...od loop with if...fi",
+        "example": "\nproctype example() {\n   byte x = 0; \n\n   do \n   :: (x < 5) -> \n       if \n       :: (x % 2 == 0) -> printf(\"Even: %d\\n\", x); \n       :: (x % 2 == 1) -> printf(\"Odd: %d\\n\", x); \n       fi; \n       x++; \n   :: else -> break; \n   od; \n} \n\ninit { \n   run example(); \n}",
+        "scenario": "Used to model repeated execution of code with internal branching using conditional guards, useful for iterative behavior with varying outcomes based on conditions."
     }
 }

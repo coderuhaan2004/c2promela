@@ -1,4 +1,4 @@
-1. Time: 4 min 41s
+1. Inference Time: 4 min 41s
 
 Generated Output:
 
