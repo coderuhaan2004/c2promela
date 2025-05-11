@@ -47,7 +47,7 @@ def generate_prompt(c_code):
     return prompt
 
 # Read C code from a file
-with open("c_code.c", "r") as file:
+with open("inputs/c_code.c", "r") as file:
     c_code = file.read()
 
 # Read API key from a file

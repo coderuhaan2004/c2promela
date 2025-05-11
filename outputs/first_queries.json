@@ -1,0 +1,50 @@
+[
+    {
+        "construct": "Function definition",
+        "query": "Define a function named factorial that takes an integer as input and returns an integer."
+    },
+    {
+        "construct": "Recursive function",
+        "query": "Define a recursive procedure to calculate the factorial of a number."
+    },
+    {
+        "construct": "Conditional block (if-else)",
+        "query": "Use an if-else block to handle the base case (n == 0) and the recursive case of the factorial function."
+    },
+    {
+        "construct": "Return statement",
+        "query": "Return the value 1 when n is 0 in the factorial function."
+    },
+    {
+        "construct": "Return statement",
+        "query": "Return the product of n and the factorial of (n-1) in the recursive case of the factorial function."
+    },
+    {
+        "construct": "Function definition",
+        "query": "Define the main function, the entry point of the program."
+    },
+    {
+        "construct": "Variable declaration",
+        "query": "Declare an integer variable named num and initialize it to 5."
+    },
+    {
+        "construct": "Variable declaration",
+        "query": "Declare an integer variable named result."
+    },
+    {
+        "construct": "Function call",
+        "query": "Call the factorial function with num as an argument and store the result in the result variable."
+    },
+    {
+        "construct": "Standard library usage (printf)",
+        "query": "Use the printf function from the stdio.h library to print the result to the console."
+    },
+    {
+        "construct": "Return statement",
+        "query": "Return 0 from the main function to indicate successful execution."
+    },
+    {
+        "construct": "Include directive",
+        "query": "Include the standard input/output library (stdio.h) to use functions like printf."
+    }
+]

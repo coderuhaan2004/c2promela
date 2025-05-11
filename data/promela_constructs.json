@@ -1,52 +1,107 @@
 {
+    "Data Types": {
+        "name": "Basic Data Types",
+        "example": "bit flag = 1;\nbool status = true;\nbyte counter = 0;\nshort value = -100;\nint number = 1000;\nunsigned x = 50;\nmtype = { READY, RUNNING, WAITING };\nmtype state = READY;",
+        "scenario": "Defines various primitive data types in Promela for storing different kinds of values."
+    },
+    "Arrays": {
+        "name": "Arrays",
+        "example": "byte arr[5]; // Array of 5 bytes\narr[0] = 10;",
+        "scenario": "Used to define and manipulate a collection of elements of the same data type."
+    },
+    "Channels": {
+        "name": "Channels",
+        "example": "chan ch = [2] of { int }; // Channel storing int values\nch!5; // Sending data to channel\nch?x; // Receiving data from channel",
+        "scenario": "Used for communication between processes, can be synchronous or asynchronous."
+    },
     "Process Types": {
         "name": "proctype",
-        "example": "\n        proctype A()\n        {   \n            byte state;         // Local variable declaration\n            state = 3;          // Assignment statement\n        }\n\n        proctype B()\n        {   \n            byte counter = 0;   // Local variable with initialization\n            counter = counter + 1;\n        }\n        ",
+        "example": "proctype exampleProcess() {\n  byte x = 0;\n  do\n  :: x < 5 -> x++;\n  :: else -> break;\n  od;\n}",
         "scenario": "Used to define process types that specify the behavior of concurrent processes."
     },
-    "Global Variables": {
-        "name": "global variables",
-        "example": "\n        byte state = 2;          // Global variable with initialization\n\n        proctype A()\n        {   \n            (state == 1) -> state = 3;  // Conditional assignment\n        }\n\n        proctype B()\n        {   \n            state = state - 1;          // Decrementing global variable\n        }\n        ",
-        "scenario": "Used to define variables that can be accessed by multiple processes concurrently."
+    "Inline Functions": {
+        "name": "inline",
+        "example": "inline square(x) {\n  x = x * x;\n}\ninit {\n  int num = 5;\n  square(num);\n  printf(\"Square: %d\\n\", num);\n}",
+        "scenario": "Used to define reusable code blocks similar to macros in C, avoiding code repetition."
     },
-    "Local Variables": {
-        "name": "local variable declaration",
-        "example": "\n        proctype Test()\n        {\n            byte counter = 5;     // Local variable with initialization\n            counter = counter + 1;\n        }\n        \",\n        \"scenario\": \"Used to declare variables that are only accessible within a specific process.\"\n    },\n    \"Assignments\": {\n        \"name\": \"assignment statement\",\n        \"example\": \"\n        proctype Example()\n        {\n            byte x = 1;           // Initialize variable\n            x = x + 2;            // Increment by 2\n        }\n        ",
-        "scenario": "Used to assign values to variables or update their values during process execution."
+    "Type Definitions": {
+        "name": "typedef",
+        "example": "typedef Node {\n  int value;\n  int next;\n}\nNode node_mem[2];\nint head = 0;\ninit {\n  atomic {\n    node_mem[0].value = 10;\n    node_mem[0].next = 1;\n    node_mem[1].value = 20;\n    node_mem[1].next = -1;\n    int temp = head;\n    printf(\"Linked List: \");\n    do\n    :: (temp != -1) ->\n      printf(\"%d -> \", node_mem[temp].value);\n      temp = node_mem[temp].next;\n    :: (temp == -1) -> break;\n    od;\n    printf(\"NULL\\n\");\n  }\n}",
+        "scenario": "Used to define complex data structures, similar to structs in C."
     },
-    "Statement Separators": {
-        "name": "semicolon and arrow",
-        "example": "\n        proctype Example()\n        {\n            byte val = 0;\n\n            val = 1;             // Semicolon separator\n            (val == 1) -> val = 2;  // Arrow separator with condition\n        }\n        ",
-        "scenario": "Used to separate multiple statements in a process body. The arrow can indicate causality."
+    "Loop Structures": {
+        "name": "do...od",
+        "example": "byte i = 0;\ndo\n:: (i < 5) ->\n  printf(\"%d\\n\", i);\n  i++;\n:: else -> break;\nod;",
+        "scenario": "Used to define loops in Promela, similar to while loops in C."
     },
-    "Process Instantiation": {
-        "name": "run statement",
-        "example": "\n        init \n        {\n            run A();         // Instantiate process A\n            run B();         // Instantiate process B\n        }\n\n        proctype A(byte state; short foo)\n        {\n            (state == 1) -> state = foo;\n        }\n\n        init\n        {\n            run A(1, 3);    // Pass parameters to process A\n        }\n       ",
-        "scenario": "Used to create and execute instances of processes in the Promela model."
+    "Random Choice": {
+        "name": "Random Selection",
+        "example": "byte x;\nproctype randomChoice() {\n  do\n  :: x = 1; printf(\"Randomly chose: %d\\n\", x);\n  :: x = 2; printf(\"Randomly chose: %d\\n\", x);\n  :: x = 3; printf(\"Randomly chose: %d\\n\", x);\n  :: break;\n  od;\n}",
+        "scenario": "Used to model non-deterministic behavior by randomly selecting one of multiple execution paths."
     },
-    "Macro Definitions": {
-        "name": "#define",
-        "example": "\"\n    #define true    1         // Define true as constant 1\n    #define false   0         // Define false as constant 0\n    #define Aturn   false     // Define Aturn as false\n    #define Bturn   true      // Define Bturn as true\n    ",
-        "scenario": "Used to define constant values or symbolic names in Promela specifications, similar to C-style macros."
+    "Channel Declaration": {
+        "name": "Channel Declaration",
+        "example": "chan ch1 = [0] of { byte }; // Synchronous channel (no buffer)\nchan ch2 = [3] of { int }; // Asynchronous channel (buffer size = 3)\nchan ch3 = [2] of { int, bool }; // Channel storing (int, bool) pairs",
+        "scenario": "Used to declare channels for inter-process communication with different buffer sizes and data types."
     },
-    "Typedef Declaration": {
-        "name": "typedef construct",
-        "example": "\n    typedef Node {\n        int value;\n        int next;\n    }\n\n    Node node_mem[2];\n    int head = 0;\n\n    init {\n        atomic {\n            node_mem[0].value = 10;\n            node_mem[0].next = 1;\n            node_mem[1].value = 20;\n        }\n    }",
-        "scenario": "Used to define custom data structures similar to structs in C, allowing the grouping of related variables under one type."
+    "Sending and Receiving": {
+        "name": "Channel Communication",
+        "example": "chan ch = [2] of { byte };\nproctype Sender() {\n  ch!5; // Sending value 5\n}\nproctype Receiver() {\n  byte x;\n  ch?x; // Receiving into x\n  printf(\"Received: %d\\n\", x);\n}\ninit {\n  run Sender();\n  run Receiver();\n}",
+        "scenario": "Used for sending and receiving messages between processes through channels."
     },
-    "Inline Definition": {
-        "name": "inline construct",
-        "example": "\n    inline square(x) {\n        x = x * x;\n    }\n\n    init {\n        int num = 5;\n        square(num);\n        printf(\"Square: %d\\n\", num);\n    }",
-        "scenario": "Used to define reusable code blocks, similar to macros in C, helping to reduce repetition and improve code clarity."
+    "Sequential Execution": {
+        "name": "Synchronous Channels",
+        "example": "chan sync_ch = [0] of { byte };\nproctype Step1() {\n  printf(\"Step 1 started\\n\");\n  sync_ch!1; // Waits until received\n}\nproctype Step2() {\n  byte msg;\n  sync_ch?msg; // Receives and allows next step\n  printf(\"Step 2 executed\\n\");\n}\ninit {\n  run Step1();\n  run Step2();\n}",
+        "scenario": "Used to enforce sequential execution between processes using synchronous channels."
     },
-    "Repetition and Nondeterministic Choice": {
-        "name": "do...od construct",
-        "example": "\n    byte x;\n\n    proctype randomChoice() {\n        do\n        :: x = 1; printf(\"Randomly chose: %d\\n\", x);\n        :: x = 2; printf(\"Randomly chose: %d\\n\", x);\n        :: x = 3; printf(\"Randomly chose: %d\\n\", x);\n        :: break;\n        od;\n    }\n\n    init {\n        run randomChoice();\n    }",
-        "scenario": "Used to model repetition and nondeterministic choices among multiple guarded commands, continuing until a break is encountered or no guard is executable."
+    "Atomic Blocks": {
+        "name": "atomic",
+        "example": "byte x = 0;\nproctype Example() {\n  atomic {\n    x = x + 1;\n    printf(\"With atomic: x = %d\\n\", x);\n    x = x * 2;\n    printf(\"With atomic (after multiplication): x = %d\\n\", x);\n  }\n}\ninit {\n  run Example();\n  run Example();\n}",
+        "scenario": "Used to ensure that a block of statements executes without interruption from other processes."
     },
-    "Loops with Conditionals": {
-        "name": "do...od loop with if...fi",
-        "example": "\nproctype example() {\n   byte x = 0; \n\n   do \n   :: (x < 5) -> \n       if \n       :: (x % 2 == 0) -> printf(\"Even: %d\\n\", x); \n       :: (x % 2 == 1) -> printf(\"Odd: %d\\n\", x); \n       fi; \n       x++; \n   :: else -> break; \n   od; \n} \n\ninit { \n   run example(); \n}",
-        "scenario": "Used to model repeated execution of code with internal branching using conditional guards, useful for iterative behavior with varying outcomes based on conditions."
+    "Return Values": {
+        "name": "Return Values",
+        "example": "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
+        "scenario": "Used to simulate function return values using shared global variables or channels."
+    },
+    "Concurrent Processes": {
+        "name": "Process Execution",
+        "example": "proctype proc1() {\n  printf(\"Process 1 running\\n\");\n}\nproctype proc2() {\n  printf(\"Process 2 running\\n\");\n}\ninit {\n  run proc1();\n  run proc2();\n}",
+        "scenario": "Used to run multiple processes concurrently, demonstrating Promela's parallel execution model."
+    },
+    "Conditional Statements": {
+        "name": "if...fi",
+        "example": "int x = 10;\nproctype check() {\n  if\n  :: (x > 5) -> printf(\"x is greater than 5\\n\")\n  :: (x <= 5) -> printf(\"x is 5 or less\\n\")\n  fi;\n}\ninit {\n  run check();\n}",
+        "scenario": "Used to implement conditional execution similar to if-else statements in C."
+    },
+    "Array Manipulation": {
+        "name": "Array Operations",
+        "example": "int arr[5];\nproctype initialize() {\n  arr[0] = 10;\n  arr[1] = 20;\n  arr[2] = 30;\n  arr[3] = 40;\n  arr[4] = 50;\n}\nproctype print_array() {\n  int i = 0;\n  do\n  :: (i < 5) -> printf(\"arr[%d] = %d\\n\", i, arr[i]); i = i + 1;\n  :: (i >= 5) -> break;\n  od;\n}\ninit {\n  run initialize();\n  run print_array();\n}",
+        "scenario": "Used to initialize and manipulate arrays in Promela."
+    },
+    "Switch Case": {
+        "name": "Switch Case Equivalent",
+        "example": "int option = 2;\nproctype switch_case() {\n  if\n  :: option == 1 -> printf(\"Case 1: Option is 1\\n\");\n  :: option == 2 -> printf(\"Case 2: Option is 2\\n\");\n  :: option == 3 -> printf(\"Case 3: Option is 3\\n\");\n  :: else -> printf(\"Default Case: Option is not 1, 2, or 3\\n\");\n  fi;\n}\ninit {\n  run switch_case();\n}",
+        "scenario": "Used to implement switch-case behavior using if-fi construct in Promela."
+    },
+    "Break Statement": {
+        "name": "break",
+        "example": "int i = 0;\nproctype break_example() {\n  do\n  :: (i >= 5) -> printf(\"Breaking at i = %d\\n\", i); break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run break_example();\n}",
+        "scenario": "Used to exit loops in Promela, similar to break in C."
+    },
+    "Continue Statement": {
+        "name": "continue",
+        "example": "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+        "scenario": "Used to skip the remaining statements in a loop iteration, similar to continue in C."
+    },
+    "Init Process": {
+        "name": "init",
+        "example": "init {\n  run func1();\n  run func2();\n  run func3();\n}",
+        "scenario": "Used as the entry point in Promela programs, similar to main() in C."
+    },
+    "Function Communication": {
+        "name": "Process Communication",
+        "example": "byte a = 3, b = 4, result;\nproctype add() {\n  result = a + b;\n}\ninit {\n  run add();\n  printf(\"Sum: %d\\n\", result);\n}",
+        "scenario": "Demonstrates how processes can communicate through shared variables in Promela."
     }
 }
