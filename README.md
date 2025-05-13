@@ -2,6 +2,8 @@
 
 This project provides a tool to convert a subset of **C code** into **Promela**, the modeling language used by the **SPIN model checker**. The purpose is to assist in the **formal verification** of C programs by enabling their analysis with SPIN.
 
+![image](https://github.com/user-attachments/assets/0b1436e8-62f4-4e62-bdce-781d9884b0af)
+
 ---
 
 ## 🔧 Features
