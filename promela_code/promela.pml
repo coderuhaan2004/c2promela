@@ -1,32 +1,31 @@
 ```promela
-int num = 5;
-int result = 0;
+int n_global = 10;
+int a_global = 0;
+int b_global = 1;
+int next_global;
 
-proctype factorial(int n) {
-  int i = 0;
-  int temp_result = 1;
+proctype fibonacci() {
+  int i_local = 0;
 
-  if
-  :: n == 0 ->
-    result = 1;
-    printf("Factorial of 0 is 1
-")
-  :: else ->
-    i = 1;
-    do
-    :: i <= n ->
-      temp_result = temp_result * i;
-      i++;
-    :: else ->
-      break;
-    od;
-    result = temp_result;
-    printf("Factorial of %d is %d
-", n, result)
-  fi;
+  printf("Fibonacci series up to %d terms:
+", n_global);
+
+  do
+  :: (i_local < n_global) ->
+    printf("%d ", a_global);
+    next_global = a_global + b_global;
+    a_global = b_global;
+    b_global = next_global;
+    i_local = i_local + 1;
+  :: (i_local >= n_global) ->
+    break;
+  od;
+
+  printf("
+");
 }
 
 init {
-  run factorial(num);
+  run fibonacci();
 }
 ```

@@ -42,6 +42,8 @@ def generate_prompt(c_code, context):
     Task Instructions:
     - Generate equivalent Promela code for the above C code.
     - Ensure syntactic correctness in Promela. Follow the structure and keywords shown in the constructs.
+    - All variables declared in different scopes (e.g., inline functions, proctype, init) have unique names.
+    - There are no redeclarations of variables with the same name, even across inlines and processes.
     - don't print the result of a function outside the function definition. Use print statements inside the function definition.
     - Remember that Promela does NOT use curly braces for loop or conditional blocks. Use '::' conditions followed by -> and proper loop terminators (do...od, if...fi).
     - Declare all variables at the beginning of blocks/functions, not inside control structures or conditionally.

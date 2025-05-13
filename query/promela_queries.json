@@ -1,14 +1,15 @@
 [
     "init {\n  run func1();\n  run func2();\n  run func3();\n}",
-    "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
-    "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
-    "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
-    "int option = 2;\nproctype switch_case() {\n  if\n  :: option == 1 -> printf(\"Case 1: Option is 1\\n\");\n  :: option == 2 -> printf(\"Case 2: Option is 2\\n\");\n  :: option == 3 -> printf(\"Case 3: Option is 3\\n\");\n  :: else -> printf(\"Default Case: Option is not 1, 2, or 3\\n\");\n  fi;\n}\ninit {\n  run switch_case();\n}",
-    "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
     "init {\n  run func1();\n  run func2();\n  run func3();\n}",
     "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
-    "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
-    "byte result;\ninline add(a, b) {\n  result = a + b;\n}\ninit {\n  add(3, 4);\n  printf(\"Sum: %d\\n\", result);\n}",
+    "int arr[5];\nproctype initialize() {\n  arr[0] = 10;\n  arr[1] = 20;\n  arr[2] = 30;\n  arr[3] = 40;\n  arr[4] = 50;\n}\nproctype print_array() {\n  int i = 0;\n  do\n  :: (i < 5) -> printf(\"arr[%d] = %d\\n\", i, arr[i]); i = i + 1;\n  :: (i >= 5) -> break;\n  od;\n}\ninit {\n  run initialize();\n  run print_array();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
+    "int i = 0;\nproctype continue_example() {\n  do\n  :: (i == 2) -> i++; printf(\"Skipping i = 2\\n\");\n  :: (i >= 5) -> break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run continue_example();\n}",
     "int i = 0;\nproctype break_example() {\n  do\n  :: (i >= 5) -> printf(\"Breaking at i = %d\\n\", i); break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run break_example();\n}",
     "int i = 0;\nproctype break_example() {\n  do\n  :: (i >= 5) -> printf(\"Breaking at i = %d\\n\", i); break;\n  :: printf(\"i = %d\\n\", i); i++;\n  od;\n}\ninit {\n  run break_example();\n}"
 ]

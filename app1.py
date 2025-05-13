@@ -104,32 +104,104 @@ def get_index_template():
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/dracula.min.css">
         <style>
+            /* Animated gradient background */
+            body {
+                min-height: 100vh;
+                display: flex;
+                background: linear-gradient(-45deg, #1a1a2e, #16213e, #0f3460, #53354a);
+                background-size: 400% 400%;
+                animation: gradientBG 15s ease infinite;
+                color: white;
+            }
+
+            @keyframes gradientBG {
+                0% {background-position: 0% 50%;}
+                50% {background-position: 100% 50%;}
+                100% {background-position: 0% 50%;}
+            }
+
             .CodeMirror {
-                height: 500px;
-                border-radius: 0.5rem;
+                height: 50vh;
+                border-radius: 0.75rem;
                 font-size: 0.95rem;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+                transition: box-shadow 0.3s ease;
+            }
+
+            .CodeMirror:hover {
+                box-shadow: 0 0 35px rgba(0, 255, 255, 0.5);
+            }
+
+            /* Particle background */
+            .particles {
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                z-index: -1;
+            }
+
+            .particle {
+                position: absolute;
+                background: rgba(255, 255, 255, 0.1);
+                border-radius: 50%;
+                animation: float 20s linear infinite;
+            }
+
+            @keyframes float {
+                from {
+                    transform: translateY(0) scale(1);
+                    opacity: 0.5;
+                }
+                to {
+                    transform: translateY(-200vh) scale(0.5);
+                    opacity: 0;
+                }
             }
         </style>
     </head>
-    <body class="bg-gray-900 text-white min-h-screen flex flex-col items-center p-6">
-        <h1 class="text-4xl font-bold mb-6">C to Promela Converter</h1>
+    <body class="min-h-screen flex flex-col items-center p-6 relative overflow-hidden">
 
-        <div class="w-full max-w-7xl flex flex-col lg:flex-row gap-8">
+        <div class="particles">
+            <!-- Generate some random "particles" -->
+            <script>
+                for (let i = 0; i < 40; i++) {
+                    const p = document.createElement('div');
+                    p.className = 'particle';
+                    p.style.width = `${Math.random() * 6 + 2}px`;
+                    p.style.height = p.style.width;
+                    p.style.left = `${Math.random() * 100}%`;
+                    p.style.top = `${Math.random() * 100}%`;
+                    p.style.animationDuration = `${10 + Math.random() * 30}s`;
+                    document.querySelector('.particles').appendChild(p);
+                }
+            </script>
+        </div>
+
+        <h1 class="text-5xl font-extrabold mb-10 animate-pulse bg-gradient-to-r from-green-400 via-blue-500 to-purple-600 bg-clip-text text-transparent">
+            🚀 C to Promela Converter
+        </h1>
+
+        <div class="w-full max-w-7xl flex flex-col lg:flex-row gap-10 transition-all duration-500">
             <div class="flex-1">
-                <h2 class="text-xl font-semibold mb-2">C Code</h2>
+                <h2 class="text-2xl font-semibold mb-3">🧠 C Code</h2>
                 <textarea id="c-code" class="w-full"></textarea>
-                <button id="convert-btn" class="mt-4 bg-green-600 hover:bg-green-500 text-white px-4 py-2 rounded transition-all">
-                    Convert to Promela
+                <button id="convert-btn"
+                        class="mt-4 bg-gradient-to-r from-green-500 via-blue-500 to-purple-500 hover:from-green-600 hover:via-blue-600 hover:to-purple-600 text-white px-6 py-3 rounded-lg font-semibold shadow-lg transform hover:scale-105 transition-all duration-300">
+                    🔁 Convert to Promela
                 </button>
             </div>
 
             <div class="flex-1">
-                <h2 class="text-xl font-semibold mb-2">Promela Code</h2>
+                <h2 class="text-2xl font-semibold mb-3">📜 Promela Code</h2>
                 <textarea id="promela-code" class="w-full" readonly></textarea>
             </div>
         </div>
 
-        <div id="toast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded shadow-lg hidden text-white"></div>
+        <div id="toast"
+            class="fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg hidden text-white transition-all duration-300"></div>
 
         <!-- CodeMirror Dependencies -->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
@@ -154,7 +226,7 @@ def get_index_template():
 
             const showToast = (msg, type) => {
                 const toast = document.getElementById("toast");
-                toast.className = `fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded shadow-lg text-white ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`;
+                toast.className = `fixed bottom-4 left-1/2 transform -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white transition-all duration-300 ${type === 'error' ? 'bg-red-500' : 'bg-green-500'}`;
                 toast.textContent = msg;
                 toast.classList.remove("hidden");
                 setTimeout(() => {
@@ -199,7 +271,6 @@ def get_index_template():
     </html>
     """
     return html
-
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=5000)
