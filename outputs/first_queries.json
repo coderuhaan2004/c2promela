@@ -1,102 +1,50 @@
 [
     {
-        "construct": "#include <stdio.h>",
-        "query": "Include the standard input/output library for functions like printf."
+        "construct": "Include directive",
+        "query": "Import standard input/output library for functions like printf."
     },
     {
-        "construct": "#include <stdlib.h>",
-        "query": "Include the standard library for general utility functions like malloc and free."
+        "construct": "Function definition",
+        "query": "Define a function named 'factorial' that takes an integer argument."
     },
     {
-        "construct": "struct node { ... };",
-        "query": "Define a custom data structure called 'node' to represent a linked list node, containing a pointer to the next node and an integer value."
+        "construct": "Function arguments",
+        "query": "Pass an integer value as input to the 'factorial' function."
     },
     {
-        "construct": "struct node *head = NULL;",
-        "query": "Define a global pointer named 'head' of type 'struct node' and initialize it to NULL to represent the head of the linked list."
+        "construct": "Recursive function",
+        "query": "Define a function that calls itself to compute the factorial."
     },
     {
-        "construct": "struct node *tail = NULL;",
-        "query": "Define a global pointer named 'tail' of type 'struct node' and initialize it to NULL to represent the tail of the linked list."
+        "construct": "Conditional statement (if)",
+        "query": "Implement a conditional check to determine the base case for recursion."
     },
     {
-        "construct": "void test(struct node *tmp) { ... }",
-        "query": "Define a function named 'test' that takes a pointer to a 'struct node' as input and appends the node to the end of the linked list."
+        "construct": "Return statement",
+        "query": "Return an integer value from the 'factorial' function."
     },
     {
-        "construct": "tmp->next = NULL;",
-        "query": "Set the 'next' pointer of the input node to NULL, indicating the end of the list or a sublist."
-    },
-    {
-        "construct": "if (tail == NULL) { ... }",
-        "query": "Implement conditional branching based on whether the tail of the list is NULL (i.e., the list is empty)."
-    },
-    {
-        "construct": "head = tail = tmp;",
-        "query": "Assign the input node to both 'head' and 'tail' pointers when the list is empty, initializing the linked list."
-    },
-    {
-        "construct": "tail->next = tmp;",
-        "query": "Append a new node to the end of the linked list by updating the 'next' pointer of the current tail node."
-    },
-    {
-        "construct": "tail = tmp;",
-        "query": "Update the 'tail' pointer to point to the newly added node, marking it as the new end of the linked list."
-    },
-    {
-        "construct": "void print_list() { ... }",
-        "query": "Define a function named 'print_list' that iterates through the linked list and prints the value of each node."
-    },
-    {
-        "construct": "struct node *current = head;",
-        "query": "Define a pointer named 'current' of type 'struct node' and initialize it to 'head' to start traversing the linked list."
-    },
-    {
-        "construct": "while (current != NULL) { ... }",
-        "query": "Implement a loop that continues as long as the 'current' pointer is not NULL, allowing iteration through the entire linked list."
-    },
-    {
-        "construct": "printf(\"%d -> \", current->value);",
-        "query": "Print the value of the current node's 'value' member, followed by \" -> \", using the standard output function printf."
-    },
-    {
-        "construct": "current = current->next;",
-        "query": "Move to the next node in the linked list by updating the 'current' pointer to point to the node referenced by the 'next' pointer of the current node."
-    },
-    {
-        "construct": "printf(\"NULL\\n\");",
-        "query": "Print \"NULL\" followed by a newline character to indicate the end of the linked list when printing it."
-    },
-    {
-        "construct": "int main() { ... }",
+        "construct": "Function definition (main)",
         "query": "Define the main entry point of the program."
     },
     {
-        "construct": "for (int i = 1; i <= 3; i++) { ... }",
-        "query": "Implement a 'for' loop that iterates three times, with the loop variable 'i' ranging from 1 to 3."
+        "construct": "Variable declaration",
+        "query": "Define an integer variable named 'num' and initialize it with 5."
     },
     {
-        "construct": "struct node *new_node = (struct node *)malloc(sizeof(struct node));",
-        "query": "Allocate memory dynamically for a new node using 'malloc' and cast the result to a pointer of type 'struct node'."
+        "construct": "Variable declaration",
+        "query": "Define an integer variable named 'result'."
     },
     {
-        "construct": "new_node->value = i;",
-        "query": "Assign the current value of the loop variable 'i' to the 'value' member of the newly created node."
+        "construct": "Function call",
+        "query": "Call the 'factorial' function with 'num' as an argument and store the result in the 'result' variable."
     },
     {
-        "construct": "test(new_node);",
-        "query": "Call the 'test' function to add the newly created node to the linked list."
+        "construct": "Standard library usage (printf)",
+        "query": "Use the printf function to print the factorial result to the console."
     },
     {
-        "construct": "free(current);",
-        "query": "Release the memory allocated for a node pointed to by 'current' using the 'free' function."
-    },
-    {
-        "construct": "struct node *next = current->next;",
-        "query": "Store the pointer to the next node in the list before freeing the current node, so that iteration can continue."
-    },
-    {
-        "construct": "return 0;",
-        "query": "Return 0 from the main function to indicate successful program execution."
+        "construct": "Return statement",
+        "query": "Return 0 from the 'main' function to indicate successful execution."
     }
 ]
