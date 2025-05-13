@@ -3,7 +3,7 @@ import numpy as np
 import json
 
 file_path = 'data/promela_constructs_with_embeddings.json'
-query_path = 'outputs/response.json'
+query_path = 'outputs/first_queries.json'
 
 print("Loading JSON data...")
 # Load the JSON data from the file
@@ -50,7 +50,7 @@ for i in queries:
 
 
 # Dump the JSON response to a file
-with open("query/queries.json", "w") as json_file:
+with open("query/promela_queries.json", "w") as json_file:
     json.dump(promela_constructs, json_file, indent=4)
 
 print("Promela constructs extracted and saved as json file")

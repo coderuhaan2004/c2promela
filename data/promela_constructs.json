@@ -9,6 +9,11 @@
         "example": "byte arr[5]; // Array of 5 bytes\narr[0] = 10;",
         "scenario": "Used to define and manipulate a collection of elements of the same data type."
     },
+    "Simulated Malloc": {
+        "name": "Dynamic Memory Simulation",
+        "example": "typedef Node {\n  int value;\n  byte next;\n}\n\n#define MAX_NODES 5\n\nNode nodes[MAX_NODES];\nbool used[MAX_NODES];\n\ninline my_malloc(ret) {\n  byte i = 0;\n  do\n  :: (i < MAX_NODES) ->\n      if\n      :: !used[i] ->\n          used[i] = true;\n          ret = i;\n          break\n      :: else -> i++\n      fi\n  :: else -> ret = 255; break\n  od\n}\n\ninline my_free(idx) {\n  used[idx] = false;\n}\n\ninit {\n  byte ptr;\n  my_malloc(ptr);\n  if\n  :: ptr != 255 ->\n       nodes[ptr].value = 42;\n       nodes[ptr].next = 255;\n       printf(\"Allocated node at index: %d with value: %d\\n\", ptr, nodes[ptr].value);\n       my_free(ptr);\n  :: else ->\n       printf(\"Allocation failed\\n\");\n  fi;\n}",
+        "scenario": "Illustrates how to simulate dynamic memory allocation (like malloc/free) in Promela using statically defined memory pools and tracking arrays."
+    },
     "Channels": {
         "name": "Channels",
         "example": "chan ch = [2] of { int }; // Channel storing int values\nch!5; // Sending data to channel\nch?x; // Receiving data from channel",
@@ -18,6 +23,11 @@
         "name": "proctype",
         "example": "proctype exampleProcess() {\n  byte x = 0;\n  do\n  :: x < 5 -> x++;\n  :: else -> break;\n  od;\n}",
         "scenario": "Used to define process types that specify the behavior of concurrent processes."
+    },
+    "Proctype With Arguments": {
+        "name": "Parameterized Process",
+        "example": "proctype greet(byte id; chan response) {\n  printf(\"Hello from process %d!\\n\", id);\n  response!id\n}\n\nchan ch = [0] of { byte };\n\ninit {\n  run greet(1; ch);\n  byte result;\n  ch?result;\n  printf(\"Received response: %d\\n\", result);\n}",
+        "scenario": "Demonstrates how to define and run a process (proctype) with arguments in Promela, using semicolon to separate them. Useful for process-specific data or communication channels."
     },
     "Inline Functions": {
         "name": "inline",
