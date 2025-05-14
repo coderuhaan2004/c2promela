@@ -1,31 +1,26 @@
 ```promela
-int n_global = 10;
-int a_global = 0;
-int b_global = 1;
-int next_global;
+int fib_n = 10;
+int fib_a = 0;
+int fib_b = 1;
+int fib_next;
+int fib_i;
 
-proctype fibonacci() {
-  int i_local = 0;
-
+init {
   printf("Fibonacci series up to %d terms:
-", n_global);
+", fib_n);
 
+  fib_i = 0;
   do
-  :: (i_local < n_global) ->
-    printf("%d ", a_global);
-    next_global = a_global + b_global;
-    a_global = b_global;
-    b_global = next_global;
-    i_local = i_local + 1;
-  :: (i_local >= n_global) ->
-    break;
+  :: fib_i < fib_n ->
+    printf("%d ", fib_a);
+    fib_next = fib_a + fib_b;
+    fib_a = fib_b;
+    fib_b = fib_next;
+    fib_i = fib_i + 1;
+  :: else -> break;
   od;
 
   printf("
 ");
-}
-
-init {
-  run fibonacci();
 }
 ```
